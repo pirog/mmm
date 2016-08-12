@@ -1,0 +1,29 @@
+# Common sys files
+.*.swp
+._*
+.git
+.hg
+.sign
+.lock-wscript
+.svn
+.wafpickle-*
+.DS_Store
+.idea/
+*.tar
+*.jxp
+*.sublime-*
+
+# Logs
+*.log
+
+# NPM files
+npm-debug.log
+node_modules
+.sass-cache
+style.css
+html-angular*
+cache
+downloads
+generated
+test/support
+deps
