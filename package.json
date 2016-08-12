@@ -12,17 +12,18 @@
     "email": "mike.pirog@gmail.com",
     "url": "https://github.com/pirog/mmm/issues"
   },
+  "main": "lib/mmm.js",
+  "bin": {
+    "mmm": "./bin/mmm.js"
+  },
   "directories": {
     "lib": "./lib"
   },
   "dependencies": {
     "bluebird": "^3.4.1",
     "chalk": "~0.5.1",
-    "decompress": "^3.0.0",
-    "download": "^4.4.3",
-    "fs-extra": "^0.18.2",
-    "js-yaml": "^3.4.6",
-    "lodash": "^4.15.0"
+    "lodash": "^4.15.0",
+    "yargs": "^4.8.1"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

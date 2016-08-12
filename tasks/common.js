@@ -13,7 +13,8 @@ var system = {
 // All js files
 var jsFiles = [
   'Gruntfile.js',
-  'index.js',
+  'bin/**/*.js',
+  'cmds/**/*.js',
   'lib/**/*.js',
   'tasks/**/*.js'
 ];
