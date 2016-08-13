@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 
-'use strict';
-
-/*
+/**
+ * Main CLI entrypoint to use the mmm libraries
  * This file is meant to be linked as a "mmm" executable.
+ *
+ * @name mmm
  */
+
+'use strict';
 
 // Define our basic CLI
 var yargs = require('yargs');
@@ -12,8 +15,10 @@ var argv = yargs
   .commandDir('../cmds')
   .demand(1)
   .help()
-  .strict()
+  .global('verbose')
+  .count('verbose')
+  .alias('v', 'verbose')
   .argv;
 
-// Silence code style checking
+// Appease code styles
 argv = argv;

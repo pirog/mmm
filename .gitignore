@@ -15,15 +15,10 @@
 
 # Logs
 *.log
+logs
 
 # NPM files
-npm-debug.log
 node_modules
-.sass-cache
-style.css
-html-angular*
-cache
-downloads
-generated
-test/support
-deps
+
+# MMM config
+env.yaml
