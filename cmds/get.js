@@ -22,7 +22,7 @@ exports.builder = {
     default: 'GOOG'
   },
   rows: {
-    default: 10000
+    default: 100000
   },
   period: {
     default: 'daily'
@@ -41,14 +41,13 @@ exports.handler = function(argv) {
     // Build the table and headers
     var options = {
       head: ['Date', 'Open', 'High', 'Low', 'Close', 'Volume'],
-      style: {head: ['cyan'], border: ['grey']},
-      colWidths: [19, 10, 10, 10, 10, 10]
+      style: {head: ['cyan'], border: ['grey']}
     };
 
     // Translate our data into an array of rows
     var rows = _.map(data, function(value) {
       return [
-        value.date,
+        new Date(value.date).toDateString(),
         value.open,
         value.high,
         value.low,
