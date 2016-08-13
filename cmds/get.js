@@ -20,6 +20,12 @@ exports.desc = 'Get historical data about a ticker.';
 exports.builder = {
   symbol: {
     default: 'GOOG'
+  },
+  rows: {
+    default: 999999
+  },
+  period: {
+    default: 'daily'
   }
 };
 
@@ -27,11 +33,13 @@ exports.builder = {
 exports.handler = function(argv) {
 
   // Get the data
-  return mmm.quandl.get(argv.symbol)
+  return mmm.quandl.get(argv.symbol, argv.rows, argv.period, argv.desc)
 
+  // Translate data into a nice table
   .then(function(data) {
     data(function(error, data) {
 
+      // Build the table and headers
       var Table = require('cli-table');
       var table = new Table({
         head: ['Date', 'Open', 'High', 'Low', 'Close', 'Volume'],
@@ -39,6 +47,7 @@ exports.handler = function(argv) {
         colWidths: [19, 10, 10, 10, 10, 10]
       });
 
+      // Translate our data into an array of vals
       var things = _.map(data, function(value) {
         return [
           value.date,
@@ -50,12 +59,14 @@ exports.handler = function(argv) {
         ];
       });
 
-      // table is an Array, so you can `push`, `unshift`, `splice` and friends
+      // Add each entry to the table
       _.forEach(things, function(thing) {
         table.push(thing);
       });
 
+      // Print the result
       console.log(table.toString());
+
     });
   });
 
