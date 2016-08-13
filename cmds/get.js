@@ -39,15 +39,14 @@ exports.handler = function(argv) {
   .then(function(data) {
 
     // Build the table and headers
-    var Table = require('cli-table');
-    var table = new Table({
+    var options = {
       head: ['Date', 'Open', 'High', 'Low', 'Close', 'Volume'],
       style: {head: ['cyan'], border: ['grey']},
       colWidths: [19, 10, 10, 10, 10, 10]
-    });
+    };
 
-    // Translate our data into an array of vals
-    var things = _.map(data, function(value) {
+    // Translate our data into an array of rows
+    var rows = _.map(data, function(value) {
       return [
         value.date,
         value.open,
@@ -58,13 +57,8 @@ exports.handler = function(argv) {
       ];
     });
 
-    // Add each entry to the table
-    _.forEach(things, function(thing) {
-      table.push(thing);
-    });
-
-    // Print the result
-    console.log(table.toString());
+    // Print the table
+    console.log(mmm.table.build(rows, options));
 
   });
 
