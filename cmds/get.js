@@ -7,7 +7,8 @@
 'use strict';
 
 // Get our mmm library
-//var mmm = require('./../lib/mmm.js');
+var mmm = require('./../lib/mmm.js');
+var _ = require('lodash');
 
 // Define the command
 exports.command = 'get [symbol]';
@@ -23,64 +24,39 @@ exports.builder = {
 };
 
 // Define the command action
-exports.handler = function(/*argv*/) {
+exports.handler = function(argv) {
 
-/*
-var Quandl = require('d3fc-financial-feed').feedQuandl;
+  // Get the data
+  return mmm.quandl.get(argv.symbol)
 
-var quandl = Quandl()
-  .database('EOD')
-  .dataset('BAC')
-  .apiKey('kHbnwouKiGdgBstKr-AW')
-  .descending(true)
-  .collapse('daily');
-
-quandl((error, data) => {
-  if (error) throw error;
-  console.log(data);
-});
-*/
-/*
-  var Quandl = require("quandl");
-  var quandl = new Quandl({
-    auth_token: "kHbnwouKiGdgBstKr-AW",
-    api_version: 3
-  });
-
-  quandl.dataset({
-    source: "EOD",
-    table: "BAC",
-  }, {
-    order: "desc"
-
-    // Notice the YYYY-MM-DD format
-    //download_type: 'complete',
-    //start_date: "1986-05-29",
-    //end_date: "2016-8-16"
-  }, function(err, response){
-      if(err)
-          throw err;
-
-      var data = JSON.parse(response).dataset;
-        console.log(data, null, 2);
-        console.log(data.column_names);
+  .then(function(data) {
+    data(function(error, data) {
 
       var Table = require('cli-table');
-
-      // instantiate
       var table = new Table({
-          head: data.column_names,
-          style: {head: ['cyan'], border: ['grey']}
+        head: ['Date', 'Open', 'High', 'Low', 'Close', 'Volume'],
+        style: {head: ['cyan'], border: ['grey']},
+        colWidths: [19, 10, 10, 10, 10, 10]
+      });
+
+      var things = _.map(data, function(value) {
+        return [
+          value.date,
+          value.open,
+          value.high,
+          value.low,
+          value.close,
+          value.volume
+        ];
       });
 
       // table is an Array, so you can `push`, `unshift`, `splice` and friends
-      var _ = require('lodash');
-      _.forEach(data.data, function(datum) {
-        table.push(datum);
-      })
+      _.forEach(things, function(thing) {
+        table.push(thing);
+      });
 
       console.log(table.toString());
-      console.log(data.data.length);
+    });
   });
-*/
+
 };
