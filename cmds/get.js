@@ -22,7 +22,7 @@ exports.builder = {
     default: 'GOOG'
   },
   rows: {
-    default: 999999
+    default: 10000
   },
   period: {
     default: 'daily'
@@ -37,37 +37,35 @@ exports.handler = function(argv) {
 
   // Translate data into a nice table
   .then(function(data) {
-    data(function(error, data) {
 
-      // Build the table and headers
-      var Table = require('cli-table');
-      var table = new Table({
-        head: ['Date', 'Open', 'High', 'Low', 'Close', 'Volume'],
-        style: {head: ['cyan'], border: ['grey']},
-        colWidths: [19, 10, 10, 10, 10, 10]
-      });
-
-      // Translate our data into an array of vals
-      var things = _.map(data, function(value) {
-        return [
-          value.date,
-          value.open,
-          value.high,
-          value.low,
-          value.close,
-          value.volume
-        ];
-      });
-
-      // Add each entry to the table
-      _.forEach(things, function(thing) {
-        table.push(thing);
-      });
-
-      // Print the result
-      console.log(table.toString());
-
+    // Build the table and headers
+    var Table = require('cli-table');
+    var table = new Table({
+      head: ['Date', 'Open', 'High', 'Low', 'Close', 'Volume'],
+      style: {head: ['cyan'], border: ['grey']},
+      colWidths: [19, 10, 10, 10, 10, 10]
     });
+
+    // Translate our data into an array of vals
+    var things = _.map(data, function(value) {
+      return [
+        value.date,
+        value.open,
+        value.high,
+        value.low,
+        value.close,
+        value.volume
+      ];
+    });
+
+    // Add each entry to the table
+    _.forEach(things, function(thing) {
+      table.push(thing);
+    });
+
+    // Print the result
+    console.log(table.toString());
+
   });
 
 };
