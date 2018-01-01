@@ -9,16 +9,23 @@
 
 'use strict';
 
-// Define our basic CLI
-var yargs = require('yargs');
-var argv = yargs
-  .commandDir('../cmds')
-  .demand(1)
-  .help()
-  .global('verbose')
-  .count('verbose')
-  .alias('v', 'verbose')
-  .argv;
+// Grab stuff so we can bootstrap
+var bootstrap = require('./../lib/bootstrap.js');
+var errorHandler;
 
-// Appease code styles
-argv = argv;
+// Initialize mmm
+bootstrap({mode: 'cli'})
+
+// Initialize CLI
+.tap(function(mmm) {
+  return mmm.cli.init(mmm);
+})
+
+// Handle uncaught errors
+.tap(function(mmm) {
+  errorHandler = mmm.error.handleError;
+  process.on('uncaughtException', errorHandler);
+})
+
+// Catch errors
+.catch(errorHandler);

@@ -1,0 +1,4 @@
+plugins:
+  - mmm-core
+logLevelConsole: warn
+logLevel: debug

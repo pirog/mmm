@@ -1,16 +1,30 @@
 language: node_js
-node_js:
-  - "4"
-sudo: required
+matrix:
+  include:
+  - os: linux
+    env: LANDO_OSX_TYPE=linux
+    node_js: '8'
+  - os: osx
+    env: LANDO_OSX_TYPE=osx
+    node_js: '8'
 services:
   - docker
+sudo: required
 
 before_install:
 
   # Install some node deps
-  - npm install -g grunt-cli bower
+  - npm install -g grunt-cli
+
+install:
+
+  # Override the normal npm install with npm -E install
+  - npm -E install
 
 before_script:
+
+  # Edit the package.json if this isn't an official release
+  - if [ -z "$TRAVIS_TAG" ]; then node ./scripts/dev-version.js; fi
 
   # Nice dev helpers to verify our env
   - ./scripts/travis-env.sh
@@ -19,8 +33,16 @@ before_script:
   - node --version
   - npm --version
   - grunt --version
+  - node bin/mmm.js version
 
 script:
 
   # Run code and styling
   - grunt test:code
+
+  # Run the build
+  - mkdir -p release
+  - grunt pkg
+
+  # Name the release depending on whether it is an official release or not
+  - if [ ! -z "$TRAVIS_TAG" ]; then cp -rf dist/mmm-$TRAVIS_TAG release/mmm-$LANDO_OSX_TYPE-x64-$TRAVIS_TAG; fi
