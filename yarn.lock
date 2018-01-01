@@ -1905,17 +1905,9 @@ set-blocking@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
 
-"shell-escape@https://github.com/thinktandem/node-shell-escape/tarball/master":
-  version "0.2.1"
-  resolved "https://github.com/thinktandem/node-shell-escape/tarball/master#90957b7639387fea822ff77f8b6f7ceb48d5adfc"
-
 shelljs@0.3.x:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.3.0.tgz#3596e6307a781544f591f37da618360f31db57b1"
-
-shelljs@^0.6.0:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.6.1.tgz#ec6211bed1920442088fe0f70b2837232ed2c8a8"
 
 sigmund@~1.0.0:
   version "1.0.1"
@@ -2095,10 +2087,6 @@ supports-color@^4.0.0:
 supports-color@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-1.1.0.tgz#fdc4b1a210121071505a2d1ef4d9f5d8fba7ef82"
-
-sync-exec@^0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/sync-exec/-/sync-exec-0.6.2.tgz#717d22cc53f0ce1def5594362f3a89a2ebb91105"
 
 table-layout@^0.4.2:
   version "0.4.2"

@@ -22,3 +22,4 @@ node_modules
 
 # MMM config
 env.yaml
+.env
