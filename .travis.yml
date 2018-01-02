@@ -23,9 +23,6 @@ install:
 
 before_script:
 
-  # Edit the package.json if this isn't an official release
-  - if [ -z "$TRAVIS_TAG" ]; then node ./scripts/dev-version.js; fi
-
   # Nice dev helpers to verify our env
   - ./scripts/travis-env.sh
 

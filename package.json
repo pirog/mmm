@@ -38,6 +38,7 @@
     "cli-table": "^0.3.1",
     "dotenv": "^4.0.0",
     "fs-extra": "^0.18.2",
+    "gdax": "coinbase/gdax-node",
     "inquirer": "^3.1.1",
     "ip": "^1.1.5",
     "js-yaml": "^3.4.6",

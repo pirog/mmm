@@ -1,4 +1,5 @@
 plugins:
   - mmm-core
+  - mmm-gdax
 logLevelConsole: warn
 logLevel: debug
